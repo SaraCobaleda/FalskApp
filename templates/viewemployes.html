@@ -1,0 +1,157 @@
+{% for empleado in empleados %}
+<form id="view_form" method="POST" action="/updateemployes">
+    <div class="modal-body">
+        <table id="editregistro" class="table table-striped table-bordered dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="datatable_info">
+            <tr>
+                <th>EDAD</th>
+                <th>
+                    <input type="text" name="EDAD" id="EDAD" value="{{empleado.0}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>SEXO</th>
+                <th>
+                    <input type="text" name="SEXO" id="SEXO" value="{{empleado.1}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>ESTRATO</th>
+                <th>
+                    <input type="text" name="ESTRATO" id="ESTRATO" value="{{empleado.2}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>NATURALEZA DE COLEGIO</th>
+                <th>
+                    <input type="text" name="NATURALEZA DE COLEGIO" id="NATURALEZA DE COLEGIO" value="{{empleado.3}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJE INSCRIPCIÓN ICFES (No matriculado)</th>
+                <th>
+                    <input type="text" name="PUNTAJE INSCRIPCIÓN ICFES (No matriculado)" id="PUNTAJE INSCRIPCIÓN ICFES (No matriculado)" value="{{empleado.4}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>VALOR PAGADO</th>
+                <th>
+                    <input type="text" name="VALOR PAGADO" id="VALOR PAGADO" value="{{empleado.5}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>CALIF_ACADEMICA</th>
+                <th>
+                    <input type="text" name="CALIF_ACADEMICA" id="CALIF_ACADEMICA" value="{{empleado.6}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>CALIF_ECONOMICO</th>
+                <th>
+                    <input type="text" name="CALIF_ECONOMICO" id="CALIF_ECONOMICO" value="{{empleado.7}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>CALIF_FAMILIAR</th>
+                <th>
+                    <input type="text" name="CALIF_FAMILIAR" id="CALIF_FAMILIAR" value="{{empleado.8}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>CALIF_PSICOSOCIAL</th>
+                <th>
+                    <input type="text" name="CALIF_PSICOSOCIAL" id="CALIF_PSICOSOCIAL" value="{{empleado.9}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>DEPRESIÓN</th>
+                <th>
+                    <input type="text" name="DEPRESION" id="DEPRESION" value="{{empleado.10}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>ANSIEDAD</th>
+                <th>
+                    <input type="text" name="ANSIEDAD" id="ANSIEDAD" value="{{empleado.11}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJETABACO</th>
+                <th>
+                    <input type="text" name="PUNTAJETABACO" id="PUNTAJETABACO" value="{{empleado.12}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJEALCOHOL</th>
+                <th>
+                    <input type="text" name="PUNTAJEALCOHOL" id="PUNTAJEALCOHOL" value="{{empleado.13}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJECANNABIS</th>
+                <th>
+                    <input type="text" name="PUNTAJECANNABIS" id="PUNTAJECANNABIS" value="{{empleado.14}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJECOCAINA</th>
+                <th>
+                    <input type="text" name="PUNTAJECOCAINA" id="PUNTAJECOCAINA" value="{{empleado.15}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJEANFETAMINA</th>
+                <th>
+                    <input type="text" name="PUNTAJEANFETAMINA" id="PUNTAJEANFETAMINA" value="{{empleado.16}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJEINHALANTE</th>
+                <th>
+                    <input type="text" name="PUNTAJEINHALANTE" id="PUNTAJEINHALANTE" value="{{empleado.17}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJESEDANTE</th>
+                <th>
+                    <input type="text" name="PUNTAJESEDANTE" id="PUNTAJESEDANTE" value="{{empleado.18}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJEALUCINOGENO</th>
+                <th>
+                    <input type="text" name="PUNTAJEALUCINOGENO" id="PUNTAJEALUCINOGENO" value="{{empleado.19}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJEOPIACEO</th>
+                <th>
+                    <input type="text" name="PUNTAJEOPIACEO" id="PUNTAJEOPIACEO" value="{{empleado.20}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>PUNTAJEOTRADROGA</th>
+                <th>
+                    <input type="text" name="PUNTAJEOTRADROGA" id="PUNTAJEOTRADROGA" value="{{empleado.21}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>Graduado / No Graduado</th>
+                <th>
+                    <input type="text" name="Graduado / No Graduado" id="Graduado / No Graduado" value="{{empleado.22}}" class="form-control" required="true" />
+                </th>
+            </tr>
+            <tr>
+                <th>ID</th>
+                <th>
+                    <input type="text" name="ID" id="ID" value="{{empleado.22}}" class="form-control" required="true" />
+                </th>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <a href="/deleteemployes/{{empleado.0}}" class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar el registro')">Eliminar</a>
+        <button type="submit" id="Insertar" class="btn btn-primary">Actualizar</button>
+    </div>
+</form>
+
+{% endfor %}

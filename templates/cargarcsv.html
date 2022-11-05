@@ -1,0 +1,58 @@
+{% extends 'navegation.html' %} {% block body %}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <!-- top tiles -->
+    <div class="row" style="display: inline-block;">
+        <div class="tile_count"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Dashboard</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="x_panel">
+                                {% with messages = get_flashed_messages() %} {% if messages %} {% for mensaje in messages %}
+                                <div id="mensaje-succes" class="alert alert-succes alert-dismissible fade show" role="alert"><strong>{{mensaje}}</strong> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div> {% endfor %} {% endif %} {% endwith %}
+                                <form action="uploadcsv" method="POST" enctype="multipart/form-data">
+                                    <input type="file" name="csvfile" value="" required>
+                                    <input type="submit" value="Cargar">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#mensaje-succes").fadeTo(3000, 500).slideUp(500, function() {
+            $("#mensaje-succes").slideUp(500);
+        });
+    });
+</script>
+
+{% endblock %}

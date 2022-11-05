@@ -1,0 +1,108 @@
+{% extends 'navegation.html' %} {% block body %}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <!-- top tiles -->
+    <div class="row" style="display: inline-block;">
+        <div class="tile_count"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Dashboard</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="x_panel">
+                                {% with messages = get_flashed_messages() %} {% if messages %} {% for mensaje in messages %}
+                                <div id="mensaje-succes" class="alert alert-succes alert-dismissible fade show" role="alert"><strong>{{mensaje}}</strong> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div> {% endfor %} {% endif %} {% endwith %}
+                                <div class="graficas">
+                                    <h3>Escoge las opciones</h3>
+                                </div><br>
+                                <div class="selectColumn1">
+                                    <form action="/DBscan1" method="POST">
+                                        <label for="columna1">Escoga la primera variable</label><br>
+                                        <select name="columna1" id="columna1">
+                                            <option value="EDAD">EDAD</option>
+                                            <option value="SEXO">SEXO</option>
+                                            <option value="ESTRATO">ESTRATO</option>
+                                            <option value="NATURALEZA DE COLEGIO">NATURALEZA DE COLEGIO</option>
+                                            <option value="PUNTAJE INSCRIPCIÓN ICFES (No matriculado)">PUNTAJE INSCRIPCIÓN ICFES (No matriculado)</option>
+                                            <option value="VALOR PAGADO">VALOR PAGADO</option>
+                                            <option value="CALIF_ACADEMICA">CALIF_ACADEMICA</option>
+                                            <option value="CALIF_ECONOMICO">CALIF_ECONOMICO</option>
+                                            <option value="CALIF_FAMILIAR">CALIF_FAMILIAR</option>
+                                            <option value="CALIF_PSICOSOCIAL">CALIF_PSICOSOCIAL</option>
+                                            <option value="DEPRESIÓN">DEPRESIÓN</option>
+                                            <option value="ANSIEDAD">ANSIEDAD</option>
+                                            <option value="PUNTAJETABACO">PUNTAJETABACO</option>
+                                            <option value="PUNTAJEALCOHOL">PUNTAJEALCOHOL</option>
+                                            <option value="PUNTAJECANNABIS">PUNTAJECANNABIS</option>
+                                            <option value="PUNTAJECOCAINA">PUNTAJECOCAINA</option>
+                                            <option value="PUNTAJEANFETAMINA">PUNTAJEANFETAMINA</option>
+                                            <option value="PUNTAJEINHALANTE">PUNTAJEINHALANTE</option>
+                                            <option value="PUNTAJESEDANTE">PUNTAJESEDANTE</option>
+                                            <option value="PUNTAJEALUCINOGENO">PUNTAJEALUCINOGENO</option>
+                                            <option value="PUNTAJEOPIACEO">PUNTAJEOPIACEO</option>
+                                            <option value="PUNTAJEOTRADROGA">PUNTAJEOTRADROGA</option>
+                                            <option value="Graduado / No Graduado">Graduado / No Graduado</option>
+                                            <option value="ID">ID</option>
+                                        </select>
+                                        <br><br>
+                                        <label for="columna2">Escoga la segunda variable</label><br>
+                                        <select name="columna2" id="columna2">
+                                            <option value="EDAD">EDAD</option>
+                                            <option value="SEXO">SEXO</option>
+                                            <option value="ESTRATO">ESTRATO</option>
+                                            <option value="NATURALEZA DE COLEGIO">NATURALEZA DE COLEGIO</option>
+                                            <option value="PUNTAJE INSCRIPCIÓN ICFES (No matriculado)">PUNTAJE INSCRIPCIÓN ICFES (No matriculado)</option>
+                                            <option value="VALOR PAGADO">VALOR PAGADO</option>
+                                            <option value="CALIF_ACADEMICA">CALIF_ACADEMICA</option>
+                                            <option value="CALIF_ECONOMICO">CALIF_ECONOMICO</option>
+                                            <option value="CALIF_FAMILIAR">CALIF_FAMILIAR</option>
+                                            <option value="CALIF_PSICOSOCIAL">CALIF_PSICOSOCIAL</option>
+                                            <option value="DEPRESIÓN">DEPRESIÓN</option>
+                                            <option value="ANSIEDAD">ANSIEDAD</option>
+                                            <option value="PUNTAJETABACO">PUNTAJETABACO</option>
+                                            <option value="PUNTAJEALCOHOL">PUNTAJEALCOHOL</option>
+                                            <option value="PUNTAJECANNABIS">PUNTAJECANNABIS</option>
+                                            <option value="PUNTAJECOCAINA">PUNTAJECOCAINA</option>
+                                            <option value="PUNTAJEANFETAMINA">PUNTAJEANFETAMINA</option>
+                                            <option value="PUNTAJEINHALANTE">PUNTAJEINHALANTE</option>
+                                            <option value="PUNTAJESEDANTE">PUNTAJESEDANTE</option>
+                                            <option value="PUNTAJEALUCINOGENO">PUNTAJEALUCINOGENO</option>
+                                            <option value="PUNTAJEOPIACEO">PUNTAJEOPIACEO</option>
+                                            <option value="PUNTAJEOTRADROGA">PUNTAJEOTRADROGA</option>
+                                            <option value="Graduado / No Graduado">Graduado / No Graduado</option>
+                                            <option value="ID">ID</option>
+                                        </select>
+                                        <br><br>
+                                        <button type="submit" class="btn btn-dark btn-lg">Enviar</button>
+                                    </form>
+                                    <br><br><br><br>
+                                    <div>
+                                        <img src="{{ user_image }}" alt="Mike">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
