@@ -14,6 +14,20 @@ from sklearn.cluster import DBSCAN
 import seaborn as sns
 import numpy  as np
 
+#Prediccion CON VALORES ENTEROS
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+#clasificacion CON PUNTO FLOTANTE
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score
+
 app = Flask(__name__)
 
 UPLOAD_FOLDER = 'static/files'
@@ -173,8 +187,8 @@ def kmeans1():
     plt.title('Kmeans')
     path = 'static/kmeans_images/kmeans{}{}.png'.format(x, y)
     plt.savefig(path)
-    Flask_Logo = os.path.join(path)
-    return render_template("Kmeans.html", user_image=Flask_Logo)
+    kmeansIMG = os.path.join(path)
+    return render_template("Kmeans.html", user_image=kmeansIMG)
 
 @app.route ("/DBscan",methods=['GET'])
 def DBscan():
@@ -191,8 +205,101 @@ def DBscan1():
     fig = sns.scatterplot(X[:, 0], X[:, 1], hue = clusters)
     path = 'static/dbscan_images/DBscan{}{}.png'.format(x, y)
     fig.figure.savefig(path)
-    Flask_Logo = os.path.join(path)
-    return render_template("DBscan.html", user_image=Flask_Logo)    
+    dbscanIMG = os.path.join(path)
+    return render_template("DBscan.html", user_image=dbscanIMG)    
+
+@app.route ("/prediccion",methods=['GET'])
+def prediccion():
+    return render_template('/prediccion.html')
+
+#prediccion
+@app.route ("/prediccion1",methods=['POST'])
+def prediccion1():
+    dataset = pd.read_csv("static/files/DataFinal(1).csv")
+    x = request.form.get("columna1")
+    y = request.form.get("columna2")
+    path = 'static/prediccion_images/pred{}{}.png'.format(x, y)
+    X = np.array(dataset[[x, y]])
+    x = X[:,0]
+    y = X[:,1]
+    x = x.reshape(1150,1)
+    y = y.reshape(1150,1)
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 44)
+    #DecisionTreeRegressor
+    model1 = DecisionTreeRegressor()
+    model1.fit(X_train, y_train)
+    predictions1 = model1.predict(X_test)
+    errors1 = abs(predictions1 - y_test)
+    aux1 = 100*(errors1 / y_test)
+    precision1 = np.mean(aux1)
+    precision1 = round(precision1, 2)
+    #SVR
+    regressor = SVR(kernel = "rbf")
+    regressor.fit(X_train,y_train)
+    y_predSVR = regressor.predict(X_test)
+    errors2 = abs(y_predSVR - y_test)
+    aux2 = 100*(errors2 / y_test)
+    precision2 = 100 - np.mean(aux2)
+    precision2 = round(precision2, 2)
+    #RandomForestRegressor
+    randomf = RandomForestRegressor(n_estimators = 100, random_state = 0)
+    randomf.fit(X_train,y_train)
+    y_predRF = randomf.predict(X_test)
+    errors3 = abs(y_predRF - y_test)
+    aux3 = 100*(errors3 / y_test)
+    precision3 = 100 - np.mean(aux3)
+    precision3 = round(precision3, 2)
+    #Grafica
+    plt.bar(["DecisionTreeRegressor", "SVR", "RandomForestRegressor"], [precision1, precision2, precision3])
+    plt.savefig(path)
+    prediccionIMG = os.path.join(path)
+    return render_template("prediccion.html", pred1=precision1, pred2=precision2, pred3=precision3, user_image=prediccionIMG)
+
+#clasificacion
+@app.route ("/clasificacion",methods=['GET'])
+def clasificacion():
+    return render_template('/clasificacion.html')
+
+@app.route ("/clasificacion1",methods=['GET','POST'])
+def clasificacion1():
+    dataset = pd.read_csv("static/files/DataFinal(1).csv")
+    nombreCol = request.form.get("columna1")
+    if nombreCol == 'Graduado / No Graduado':
+        path = 'static/clasificacion_images/predGraduado.png'
+    else:
+        path = 'static/clasificacion_images/pred{}.png'.format(nombreCol)
+    x = dataset.drop([nombreCol, "ID"], axis = 1)
+    y = dataset[nombreCol]
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 44)
+    #KNeighborsClassifier
+    clasificador1 = KNeighborsClassifier(n_neighbors=5, metric="minkowski", p=2)
+    clasificador1 = clasificador1.fit(X_train, y_train)
+    y_pred = clasificador1.predict(X_test)
+    precision1 = precision_score(y_test, y_pred)
+    precision1 = precision1*100
+    mc1 = confusion_matrix(y_test, y_pred)
+    #GaussianNB
+    clasificador2 = GaussianNB()
+    clasificador2 = clasificador2.fit(X_train, y_train)
+    y_pred = clasificador2.predict(X_test)
+    precision2 = precision_score(y_test, y_pred)
+    precision2 = precision2*100
+    mc2 = confusion_matrix(y_test, y_pred)
+    #DecisionTreeClassifier
+    clasificador3 = DecisionTreeClassifier()
+    clasificador3 = clasificador3.fit(X_train, y_train)
+    y_pred = clasificador3.predict(X_test)
+    precision3 = precision_score(y_test, y_pred)
+    precision3 = precision3*100
+    mc3 = confusion_matrix(y_test, y_pred)
+    #Grafica
+    plt.bar(["DecisionTreeRegressor", "SVR", "RandomForestRegressor"], [precision1, precision2, precision3])
+    plt.savefig(path)
+    clasificacionIMG = os.path.join(path)
+    return render_template("clasificacion.html", pred1=precision1, pred2=precision2, pred3=precision3, user_image=clasificacionIMG,
+                                                mc01=mc1[0][0], mc02=mc1[0][1], mc03=mc1[1][0], mc04=mc1[1][1],
+                                                mc11=mc2[0][0], mc12=mc2[0][1], mc13=mc2[1][0], mc14=mc2[1][1],
+                                                mc21=mc3[0][0], mc22=mc3[0][1], mc23=mc3[1][0], mc24=mc3[1][1])
 
 if __name__=='__main__':
     app.run(port=5000, debug=True)

@@ -1,0 +1,117 @@
+{% extends 'navegation.html' %} {% block body %}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <!-- top tiles -->
+    <div class="row" style="display: inline-block;">
+        <div class="tile_count"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Dashboard</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="x_panel">
+                                {% with messages = get_flashed_messages() %} {% if messages %} {% for mensaje in messages %}
+                                <div id="mensaje-succes" class="alert alert-succes alert-dismissible fade show" role="alert"><strong>{{mensaje}}</strong> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div> {% endfor %} {% endif %} {% endwith %}
+                                <div class="graficas">
+                                    <h3>Algoritmos de Predicción</h3>
+                                </div><br>
+                                <div class="selectColumn1">
+                                    <form action="/clasificacion1" method="POST">
+                                        <label for="columna1">Escoga la primera variable</label><br>
+                                        <select name="columna1" id="columna1">
+                                            <option value="SEXO">SEXO</option>
+                                            <option value="NATURALEZA DE COLEGIO">NATURALEZA DE COLEGIO</option>
+                                            <option value="Graduado / No Graduado">Graduado / No Graduado</option>
+                                        </select>
+                                        <br><br>
+                                        <button type="submit" class="btn btn-dark btn-lg">Enviar</button>
+                                    </form>
+                                    <br><br><br><br>
+                                    <div>
+                                        <table class="table table-striped table-bordered dataTable no-footer" style="width: 100%;">
+                                            <tr>
+                                                <td>Modelo</td>
+                                                <td>Precisión del modelo </td>
+                                                <th>Matriz de confusion</th>
+                                            </tr>
+                                            <tr>
+                                                <th>KNeighborsClassifier</th>
+                                                <th>{{pred1}}</th>
+                                                <th>
+                                                    <table>
+                                                        <tr>
+                                                            <td>{{mc01}}</td>
+                                                            <td>{{mc02}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{mc03}}</td>
+                                                            <td>{{mc04}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>GaussianNB</th>
+                                                <th>{{pred2}}</th>
+                                                <th>
+                                                    <table>
+                                                        <tr>
+                                                            <td>{{mc11}}</td>
+                                                            <td>{{mc12}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{mc13}}</td>
+                                                            <td>{{mc14}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>DecisionTreeClassifier</th>
+                                                <th>{{pred3}}</th>
+                                                <th>
+                                                    <table>
+                                                        <tr>
+                                                            <td>{{mc21}}</td>
+                                                            <td>{{mc22}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{mc23}}</td>
+                                                            <td>{{mc24}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <br><br><br><br>
+                                    <div>
+                                        <img src="{{ user_image }}" alt="Grafica">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
